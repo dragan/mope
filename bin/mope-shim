@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+set -E
+
+exec mope-exec "${0##*/}" $*

@@ -1,0 +1,48 @@
+#!/usr/bin/env bash
+
+set -E
+
+read_version_file() {
+	egrep -m 1 '[^[:space:]]' "$1"
+}
+
+find_version_file() {
+	root="$(pwd)"
+	while [ -n "$root" ]; do
+		if [ -e "${root}/.mope-version" ]; then
+			echo "${root}/.mope-version"
+			return 0
+		fi
+		root="${root%/*}"
+	done
+	return 1
+}
+
+find_default_version_file() {
+	default_path="$HOME/.mope/default"
+	if [ -e "$default_path" ]; then
+		echo "$default_path"
+		return 0
+	fi
+	return 1
+}
+
+if [ -z "$MOPE_VERSION" ]; then
+	MOPE_VERSION_FILE="$(find_version_file || find_default_version_file || true)"
+
+	if [ -n "$MOPE_VERSION_FILE" ]; then
+		MOPE_VERSION="$(read_version_file "$MOPE_VERSION_FILE")"
+	else
+		echo "mope: no default version specified" >&2
+		exit 1
+	fi
+fi
+
+MOPE_VERSION_PATH="${HOME}/.mope/versions/${MOPE_VERSION}"
+
+if [ -d "$MOPE_VERSION_PATH" ]; then
+	echo "$MOPE_VERSION"
+else
+	echo "mope: version \`$MOPE_VERSION' is not installed" >&2
+	exit 1
+fi

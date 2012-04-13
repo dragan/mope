@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -E
+
+MOPE_VERSION="$(mope-version)"
+MOPE_COMMAND="$1"
+MOPE_COMMAND_PATH="${HOME}/.mope/versions/${MOPE_VERSION}/bin/${MOPE_COMMAND}"
+
+if [ -x "$MOPE_COMMAND_PATH" ]; then
+	echo "$MOPE_COMMAND_PATH"
+else
+	echo "mope: $1: command not found" >&2
+	exit 127
+fi

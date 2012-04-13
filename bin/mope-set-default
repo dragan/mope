@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -E
+
+MOPE_VERSION="$1"
+if [[ -z "$MOPE_VERSION" ]]; then
+	echo "usage: mope set-default VERSION" >&2
+	exit 1
+fi
+
+MOPE_VERSION_PATH="${HOME}/.mope/versions/${MOPE_VERSION}"
+if [ ! -d "$MOPE_VERSION_PATH" ]; then
+	echo "mope: version \`${MOPE_VERSION}' not installed" >&2
+	exit 1
+fi
+
+echo "$MOPE_VERSION" > "${HOME}/.mope/default"

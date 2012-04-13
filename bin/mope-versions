@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -E
+
+MOPE_VERSION="$(mope-version)"
+
+for path in ~/.mope/versions/*; do
+	if [ -d "$path" ]; then
+		version="${path##*/}"
+
+		if [ "$version" == "$MOPE_VERSION" ]; then
+			echo "* ${version##*/}"
+		else
+			echo "  ${version##*/}"
+		fi
+	fi
+done

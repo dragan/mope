@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+
+set -E
+
+cd "$HOME/.mope/shims"
+rm *
+
+for file in ../versions/*/bin/*; do
+	ln -fs ../bin/mope-shim "${file##*/}"
+done

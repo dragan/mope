@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+set -E
+
+MOPE_COMMAND="$1"
+if [ -z "$MOPE_COMMAND" ]; then
+	echo "usage: mope exec COMMAND [arg1 arg2...]" >&2
+	exit 1
+fi
+
+MOPE_COMMAND_PATH="$(mope-which "$MOPE_COMMAND")"
+
+shift 1
+exec -a "$MOPE_COMMAND" "$MOPE_COMMAND_PATH" $*
