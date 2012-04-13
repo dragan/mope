@@ -38,6 +38,11 @@ if [ -z "$MOPE_VERSION" ]; then
 	fi
 fi
 
+if [ "$MOPE_VERSION" = "system" ]; then
+	echo "$MOPE_VERSION"
+	exit
+fi
+
 MOPE_VERSION_PATH="${HOME}/.mope/versions/${MOPE_VERSION}"
 
 if [ -d "$MOPE_VERSION_PATH" ]; then

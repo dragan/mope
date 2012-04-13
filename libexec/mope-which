@@ -2,9 +2,39 @@
 
 set -e
 
+expand_path() {
+	local path="$1"
+	if [ -d "$path" ]; then
+		local cwd="$(pwd)"
+		cd "$path"
+		pwd
+		cd "$cwd"
+	fi
+}
+
+remove_from_path() {
+	local path_to_remove="$(expand_path "$1")"
+	local result=""
+
+	for path in ${PATH//:/$'\n'}; do
+		path="$(expand_path "$path" || true)"
+		if [ "$path" != "$path_to_remove" ]; then
+			result="${result}${path}:"
+		fi
+	done
+
+	echo "${result%:}"
+}
+
 MOPE_VERSION="$(mope-version)"
 MOPE_COMMAND="$1"
-MOPE_COMMAND_PATH="${HOME}/.mope/versions/${MOPE_VERSION}/bin/${MOPE_COMMAND}"
+
+if [[ "$MOPE_VERSION" = "system" ]]; then
+	PATH="$(remove_from_path "${HOME}/.mope/shims")"
+	MOPE_COMMAND_PATH="$(command -v "$MOPE_COMMAND")"
+else
+	MOPE_COMMAND_PATH="${HOME}/.mope/versions/${MOPE_VERSION}/bin/${MOPE_COMMAND}"
+fi
 
 if [ -x "$MOPE_COMMAND_PATH" ]; then
 	echo "$MOPE_COMMAND_PATH"
