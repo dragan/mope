@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+MOPE_VERSION="0.1.0"
+
+set -e
+
+resolve_link() {
+	$(type -p greadlink readlink | head -1) $1
+}
+
+abs_dirname() {
+	local cwd="$(pwd)"
+	local path="$1"
+
+	while [ -n "$path" ]; do
+		cd "${path%/*}"
+		local name="${path##*/}"
+		path="$(resolve_link "$name" || true)"
+	done
+
+	pwd
+	cd "$cwd"
+}
+
+BIN_DIR="$(abs_dirname "$0")"
+export PATH="$BIN_DIR:$PATH"
+
+command="$1"
+if [[ -z "$command" ]]; then
+	echo "mope ${MOPE_VERSION}" >&2
+else
+	command_path="$(command -v "mope-$command" || true)"
+	if [ -z "$command_path" ]; then
+		echo "mope: no such command \`$command'" >&2
+		exit 1
+	fi
+
+	shift 1
+	exec "$command_path" "$@"
+fi
