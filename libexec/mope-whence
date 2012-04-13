@@ -20,5 +20,10 @@ whence() {
 }
 
 MOPE_COMMAND="$1"
+if [[ -z "$MOPE_COMMAND" ]]; then
+	echo "usage: mope whence [--path] COMMAND" >&2
+	exit 1
+fi
+
 result="$(whence "$MOPE_COMMAND")"
 [ -n "$result" ] && echo "$result"
