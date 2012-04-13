@@ -4,14 +4,22 @@ set -e
 
 MOPE_VERSION="$(mope-version)"
 
-for path in ~/.mope/versions/*; do
+hit_prefix="* "
+miss_prefix="  "
+
+if [[ "$1" = "--bare" ]]; then
+	hit_prefix=""
+	miss_prefix=""
+fi
+
+for path in "${HOME}/.mope/versions/"*; do
 	if [ -d "$path" ]; then
 		version="${path##*/}"
 
 		if [ "$version" == "$MOPE_VERSION" ]; then
-			echo "* $version"
+			echo "${hit_prefix}${version}"
 		else
-			echo "  $version"
+			echo "${miss_prefix}${version}"
 		fi
 	fi
 done
