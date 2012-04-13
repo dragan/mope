@@ -4,7 +4,7 @@ set -e
 
 mkdir -p "${HOME}/.mope/shims"
 cd "${HOME}/.mope/shims"
-rm *
+rm -f *
 
 for file in ../versions/*/bin/*; do
 	ln -fs ../bin/mope-shim "${file##*/}"
