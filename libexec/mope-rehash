@@ -2,15 +2,29 @@
 
 set -e
 
+create_prototype_shim() {
+	cat > .mope-shim <<SH
+#!/usr/bin/env bash
+set -e
+exec mope exec "\${0##*/}" "\$@"
+SH
+	chmod +x .mope-shim
+}
+
+make_shims() {
+	local glob="$@"
+
+	for file in $glob; do
+		local shim="${file##*/}"
+		[ -e "$shim" ] || ln -f .mope-shim "$shim"
+	done
+}
+
 mkdir -p "${HOME}/.mope/shims"
 cd "${HOME}/.mope/shims"
 rm -f *
 
-for file in ../versions/*/bin/*; do
-	shim="${file##*/}"
-	cat > "$shim" <<SH
-#!/usr/bin/env sh
-exec mope exec $shim "\$@"
-SH
-	chmod +x "$shim"
-done
+create_prototype_shim
+make_shims ../versions/*/bin/*
+
+rm -f .mope-shim
