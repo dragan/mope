@@ -18,10 +18,11 @@ find_version_file() {
 	return 1
 }
 
+DEFAULT_PATH="${HOME}/.mope/default"
+
 find_default_version_file() {
-	local default_path="$HOME/.mope/default"
-	if [ -e "$default_path" ]; then
-		echo "$default_path"
+	if [ -e "$DEFAULT_PATH" ]; then
+		echo "$DEFAULT_PATH"
 		return 0
 	fi
 	return 1
@@ -33,8 +34,8 @@ if [ -z "$MOPE_VERSION" ]; then
 	if [ -n "$MOPE_VERSION_FILE" ]; then
 		MOPE_VERSION="$(read_version_file "$MOPE_VERSION_FILE")"
 	else
-		echo "mope: no default version specified" >&2
-		exit 1
+		echo system > "$DEFAULT_PATH"
+		MOPE_VERSION=system
 	fi
 fi
 

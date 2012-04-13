@@ -2,7 +2,7 @@
 
 set -e
 
-MOPE_VERSION="$(mope-version 2>/dev/null || true)"
+MOPE_VERSION="$(mope-version)"
 
 hit_prefix="* "
 miss_prefix="  "
