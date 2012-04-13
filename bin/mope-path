@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-set -E
+set -e
 
 if [ -n "$1" ]; then
 	MOPE_VERSION="$1"
