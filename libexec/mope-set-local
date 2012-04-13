@@ -3,7 +3,7 @@
 set -e
 
 MOPE_VERSION="$1"
-if [[ -z "$MOPE_VERSION" ]]; then
+if [ -z "$MOPE_VERSION" ]; then
 	echo "usage: mope set-local VERSION" >&2
 	exit 1
 fi

@@ -2,7 +2,7 @@
 
 set -e
 
-if [[ "$1" = "--path" ]]; then
+if [ "$1" = "--path" ]; then
 	print_paths="1"
 	shift
 else
@@ -13,14 +13,14 @@ whence() {
 	local command="$1"
 	mope-versions --bare | while read version; do
 		path="$(mope-prefix "$version")/bin/${command}"
-		if [[ -x "$path" ]]; then
+		if [ -x "$path" ]; then
 			[ "$print_paths" ] && echo "$path" || echo "$version"
 		fi
 	done
 }
 
 MOPE_COMMAND="$1"
-if [[ -z "$MOPE_COMMAND" ]]; then
+if [ -z "$MOPE_COMMAND" ]; then
 	echo "usage: mope whence [--path] COMMAND" >&2
 	exit 1
 fi

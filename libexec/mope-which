@@ -29,7 +29,7 @@ remove_from_path() {
 MOPE_VERSION="$(mope-version)"
 MOPE_COMMAND="$1"
 
-if [[ "$MOPE_VERSION" = "system" ]]; then
+if [ "$MOPE_VERSION" = "system" ]; then
 	PATH="$(remove_from_path "${HOME}/.mope/shims")"
 	MOPE_COMMAND_PATH="$(command -v "$MOPE_COMMAND")"
 else
@@ -42,7 +42,7 @@ else
 	echo "mope: $MOPE_COMMAND: command not found" >&2
 
 	versions="$(mope-whence "$MOPE_COMMAND" || true)"
-	if [[ -n "$versions" ]]; then
+	if [ -n "$versions" ]; then
 		{
 			echo
 			echo "The \`$1' command exists in these Mono versions:"

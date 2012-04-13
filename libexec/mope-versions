@@ -7,7 +7,7 @@ MOPE_VERSION="$(mope-version)"
 hit_prefix="* "
 miss_prefix="  "
 
-if [[ "$1" = "--bare" ]]; then
+if [ "$1" = "--bare" ]; then
 	hit_prefix=""
 	miss_prefix=""
 fi
