@@ -29,7 +29,7 @@ remove_from_path() {
 	echo "${result%:}"
 }
 
-MOPE_VERSION="$(mope-version)"
+MOPE_VERSION="$(mope-version-name)"
 MOPE_COMMAND="$1"
 
 if [ "$MOPE_VERSION" = "system" ]; then

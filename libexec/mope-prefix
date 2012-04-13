@@ -5,7 +5,7 @@ set -e
 if [ -n "$1" ]; then
 	MOPE_VERSION="$1"
 elif [ -z "$MOPE_VERSION" ]; then
-	MOPE_VERSION="$(mope-version)"
+	MOPE_VERSION="$(mope-version-name)"
 fi
 
 if [ "$MOPE_VERSION" = "system" ]; then
