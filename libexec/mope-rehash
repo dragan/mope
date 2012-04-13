@@ -7,5 +7,10 @@ cd "${HOME}/.mope/shims"
 rm -f *
 
 for file in ../versions/*/bin/*; do
-	ln -fs ../bin/mope-shim "${file##*/}"
+	shim="${file##*/}"
+	cat > "$shim" <<SH
+#!/usr/bin/env sh
+exec mope exec $shim "\$@"
+SH
+	chmod +x "$shim"
 done
