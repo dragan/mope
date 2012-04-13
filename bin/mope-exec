@@ -11,4 +11,4 @@ fi
 MOPE_COMMAND_PATH="$(mope-which "$MOPE_COMMAND")"
 
 shift 1
-exec -a "$MOPE_COMMAND" "$MOPE_COMMAND_PATH" $*
+exec -a "$MOPE_COMMAND" "$MOPE_COMMAND_PATH" "$@"
