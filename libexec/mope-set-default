@@ -9,6 +9,6 @@ if [[ -z "$MOPE_VERSION" ]]; then
 fi
 
 # Make sure the specified version is installed
-mope-path "$MOPE_VERSION" >/dev/null
+mope-prefix "$MOPE_VERSION" >/dev/null
 
 echo "$MOPE_VERSION" > "${HOME}/.mope/default"
