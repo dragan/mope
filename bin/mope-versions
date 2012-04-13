@@ -9,9 +9,9 @@ for path in ~/.mope/versions/*; do
 		version="${path##*/}"
 
 		if [ "$version" == "$MOPE_VERSION" ]; then
-			echo "* ${version##*/}"
+			echo "* $version"
 		else
-			echo "  ${version##*/}"
+			echo "  $version"
 		fi
 	fi
 done

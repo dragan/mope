@@ -2,7 +2,7 @@
 
 set -E
 
-cd "$HOME/.mope/shims"
+cd "${HOME}/.mope/shims"
 rm *
 
 for file in ../versions/*/bin/*; do
