@@ -9,6 +9,17 @@ MOPE_COMMAND_PATH="${HOME}/.mope/versions/${MOPE_VERSION}/bin/${MOPE_COMMAND}"
 if [ -x "$MOPE_COMMAND_PATH" ]; then
 	echo "$MOPE_COMMAND_PATH"
 else
-	echo "mope: $1: command not found" >&2
+	echo "mope: $MOPE_COMMAND: command not found" >&2
+
+	versions="$(mope-whence "$MOPE_COMMAND" || true)"
+	if [[ -n "$versions" ]]; then
+		{
+			echo
+			echo "The \`$1' command exists in these Mono versions:"
+			echo "$versions" | sed 's/^/  /g'
+			echo
+		} >&2
+	fi
+
 	exit 127
 fi
