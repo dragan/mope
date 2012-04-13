@@ -8,10 +8,7 @@ if [[ -z "$MOPE_VERSION" ]]; then
 	exit 1
 fi
 
-MOPE_VERSION_PATH="${HOME}/.mope/versions/${MOPE_VERSION}"
-if [ ! -d "$MOPE_VERSION_PATH" ]; then
-	echo "mope: version \`${MOPE_VERSION}' not installed" >&2
-	exit 1
-fi
+# Make sure the specified version is installed
+mope-path "$MOPE_VERSION" >/dev/null
 
 echo "$MOPE_VERSION" > "${HOME}/.mope/default"
