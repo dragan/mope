@@ -2,6 +2,7 @@
 
 set -E
 
+mkdir -p "${HOME}/.mope/shims"
 cd "${HOME}/.mope/shims"
 rm *
 
