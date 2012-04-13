@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -e
+
+if [[ "$1" = "--path" ]]; then
+	print_paths="1"
+	shift
+else
+	print_paths=""
+fi
+
+whence() {
+	local command="$1"
+	mope-versions --bare | while read version; do
+		path="$(mope-prefix "$version")/bin/${command}"
+		if [[ -x "$path" ]]; then
+			[ "$print_paths" ] && echo "$path" || echo "$version"
+		fi
+	done
+}
+
+MOPE_COMMAND="$1"
+result="$(whence "$MOPE_COMMAND")"
+[ -n "$result" ] && echo "$result"
