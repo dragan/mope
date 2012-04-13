@@ -5,8 +5,8 @@ set -e
 find_version_file() {
 	local root="$(pwd)"
 	while [ -n "$root" ]; do
-		if [ -e "${root}/.mope-version" ]; then
-			echo "${root}/.mope-version"
+		if [ -e "${root}/.mono-version" ]; then
+			echo "${root}/.mono-version"
 			return 0
 		fi
 		root="${root%/*}"

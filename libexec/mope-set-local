@@ -11,4 +11,4 @@ fi
 # Make sure the specified version is installed
 mope-prefix "$MOPE_VERSION" >/dev/null
 
-echo "$MOPE_VERSION" > .mope-version
+echo "$MOPE_VERSION" > .mono-version
