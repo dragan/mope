@@ -17,6 +17,6 @@ Each version is a working tree with it's own binaries, like `~/.mope/versions/2.
 This project was heavily inspired by the [rbenv](https://github.com/sstephenson/ruby-build) by Sam Stephenson. 
 
 ## License
-mono-build is released under the [MIT License][mit-license]. See LICENSE for more information.
+mope is released under the [MIT License][mit-license]. See LICENSE for more information.
 
 [mit-license]: http://www.opensource.org/licenses/mit-license.php
