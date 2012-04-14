@@ -31,6 +31,11 @@ else
 fi
 export MOPE_ROOT
 
+if [ -z "${MOPE_DIR}" ]; then
+  MOPE_DIR="$(pwd)"
+fi
+export MOPE_DIR
+
 shopt -s nullglob
 
 bin_path="$(abs_dirname "$0")"

@@ -6,7 +6,7 @@ set -e
 
 DEFAULT_PATH="${MOPE_ROOT}/default"
 
-root="$(pwd)"
+root="$MOPE_DIR"
 while [ -n "$root" ]; do
 	if [ -e "${root}/.mono-version" ]; then
 		echo "${root}/.mono-version"
