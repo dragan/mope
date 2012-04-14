@@ -2,6 +2,8 @@
 
 mope lets you easily switch between multiple versions of Mono.  It's simple, unobtrusive, and follows the UNIX tradition of single-purpose tools that do one thing well.
 
+<img src="http://cl.ragan.io/011j0w1W1B1T0Z010A1G/mope.png" width="859" height="718" />
+
 ## Table of Contents
 
     * [1 How It Works](#section_1)
