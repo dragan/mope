@@ -64,3 +64,6 @@ cd "$SHIMS_PATH"
 # Create the prototype shim, then make shims for all known binaries.
 create_prototype_shim
 make_shims ../versions/*/bin/*
+
+# Restore the previous working directory.
+cd "$OLDPWD"
