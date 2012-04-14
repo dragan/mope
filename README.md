@@ -6,7 +6,7 @@ mope lets you easily switch between multiple versions of Mono.  It's simple, uno
 
 ## Table of Contents
 
-    * [1 How It Works](#section_1)
+  * [1 How It Works](#section_1)
 
 ## <a name="section_1"></a> 1 How It Works
 
@@ -16,7 +16,7 @@ Each version is a working tree with it's own binaries, like `~/.mope/versions/2.
 
 ## Thanks
 
-This project was heavily inspired by the [rbenv](https://github.com/sstephenson/ruby-build) by Sam Stephenson. 
+This project was heavily inspired by the [rbenv](https://github.com/sstephenson/ruby-build) project by Sam Stephenson. 
 
 ## License
 mope is released under the [MIT License][mit-license]. See LICENSE for more information.
