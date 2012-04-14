@@ -32,7 +32,9 @@ fi
 export MOPE_ROOT
 
 if [ -z "${MOPE_DIR}" ]; then
-  MOPE_DIR="$(pwd)"
+	MOPE_DIR="$(pwd)"
+else
+	MOPE_DIR="$(abs_dirname "$MOPE_DIR")"
 fi
 export MOPE_DIR
 
