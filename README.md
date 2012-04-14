@@ -46,7 +46,15 @@ to subdirectories of `~/.mope/versions`.  For example, you might have `~/.mope/v
 `~/.mope/versions/2.11.0`.
 
 Each version is a working tree with it's own binaries, like `~/.mope/versions/2.10.9/bin/mono` and 
-`~/.mope/versions/2.10.9/bin/csharp`.
+`~/.mope/versions/2.10.9/bin/csharp`.  mope makes _shim binaries_ for every such binary across 
+all installed versions of Mono.
+
+These shims are simple wrapper scripts that live in `~/.mope/shims` and detect which Mono version 
+you want to use. They insert the directory for the selected version at the beginning of 
+your `$PATH` and then execute the corresponding binary.
+
+Because of the simplicity of the shim approach, all you need to use mope is `~/.mope/shims` 
+in your `$PATH`.
 
 ## <a name="section_2"></a> 2 Installation
 
