@@ -32,6 +32,8 @@ the UNIX tradition of single-purpose tools that do one thing well.
   * [1 How It Works](#section_1)
   * [2 Installation](#section_2)
   * [3 Usage](#section_3)
+    * [3.1 mope global](#section_3.1)
+    * [3.2 mope local](#section_3.2)
   * [4 Development](#section_4)
     * [4.1 Version History](#section_4.1)
     * [4.2 Thanks](#section_4.2)
@@ -49,6 +51,35 @@ Each version is a working tree with it's own binaries, like `~/.mope/versions/2.
 ## <a name="section_2"></a> 2 Installation
 
 ## <a name="section_3"></a> 3 Usage
+
+### <a name="section_3.1"></a> 3.1 mope global
+
+Sets the global version of Mono to be used in all shells by writing
+the version name to the `~/.mope/version` file. This version can be
+overridden by a per-project `.mono-version` file, or by setting the
+`MOPE_VERSION` environment variable.
+
+    $ mope global 2.10.9
+
+The special version name `system` tells mope to use the system Mono
+(detected by searching your `$PATH`).
+
+When run without a version number, `mope global` reports the
+currently configured global version.
+
+### <a name="section_3.2"></a> 3.2 mope local
+
+Sets a local per-project Mono version by writing the version name to
+a `.mono-version` file in the current directory. This version
+overrides the global, and can be overridden itself by setting the
+`MOPE_VERSION` environment variable.
+
+    $ mope local 2.11.0
+
+When run without a version number, `mope local` reports the currently
+configured local version. You can also unset the local version:
+
+    $ mope local --unset
 
 ## <a name="section_4"></a> 4 Development
 
