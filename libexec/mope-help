@@ -48,6 +48,7 @@ setting the MOPE_VERSION environment variable.
 $(print_set_version)"
 ;;
 local) echo "usage: mope local <version>
+       mope local --unset
 
 Sets the local directory-specific Mono version by writing the version
 name to a file named '.mono-version'.
@@ -58,7 +59,11 @@ file is found in the tree, mope will use the global Mono version
 specified with \`mope global', or the version specified in the
 MOPE_VERSION environment variable.
 
-$(print_set_version)"
+$(print_set_version)
+
+To remove the local directory-specific Mono version, just pass the 
+--unset option and the '.mono-version' file will be removed from 
+the current directory."
 ;;
 version) echo "usage: mope version
 
