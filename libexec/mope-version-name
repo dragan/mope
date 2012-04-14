@@ -2,15 +2,13 @@
 
 set -e
 
-DEFAULT_PATH="${HOME}/.mope/default"
-
 if [ -z "$MOPE_VERSION" ]; then
 	MOPE_VERSION_FILE="$(mope-version-file)"
 	MOPE_VERSION="$(mope-version-file-read "$MOPE_VERSION_FILE" || true)"
 fi
 
-if [ "$MOPE_VERSION" = "system" ]; then
-	echo "$MOPE_VERSION"
+if [ -z "$MOPE_VERSION" ] || [ "$MOPE_VERSION" = "system" ]; then
+	echo "system"
 	exit
 fi
 
