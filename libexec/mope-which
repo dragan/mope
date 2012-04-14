@@ -39,6 +39,11 @@ remove_from_path() {
 MOPE_VERSION="$(mope-version-name)"
 MOPE_COMMAND="$1"
 
+if [ -z "$MOPE_COMMAND" ]; then
+	echo "usage: mope which COMMAND" >&2
+	exit 1
+fi
+
 if [ "$MOPE_VERSION" = "system" ]; then
 	PATH="$(remove_from_path "${MOPE_ROOT}/shims")"
 	MOPE_COMMAND_PATH="$(command -v "$MOPE_COMMAND")"
