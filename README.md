@@ -60,6 +60,9 @@ in your `$PATH`.
 
 ## <a name="section_3"></a> 3 Usage
 
+Like `git`, the `mope` command delegates to subcommands based on its first argument. 
+The most common subcommands are:
+
 ### <a name="section_3.1"></a> 3.1 mope global
 
 Sets the global version of Mono to be used in all shells by writing
