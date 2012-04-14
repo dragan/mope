@@ -4,15 +4,16 @@ set -e
 
 [ -n "$MOPE_DEBUG" ] && set -x
 
-DEFAULT_PATH="${MOPE_ROOT}/default"
-
 root="$MOPE_DIR"
+local_version_file=".mono-version"
 while [ -n "$root" ]; do
-	if [ -e "${root}/.mono-version" ]; then
-		echo "${root}/.mono-version"
+	if [ -e "${root}/${local_version_file}" ]; then
+		echo "${root}/${local_version_file}"
 		exit
 	fi
 	root="${root%/*}"
 done
 
-echo "$DEFAULT_PATH"
+global_version_file="${MOPE_ROOT}/version"
+
+echo "$global_version_file"

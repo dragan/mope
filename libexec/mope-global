@@ -5,7 +5,7 @@ set -e
 [ -n "$MOPE_DEBUG" ] && set -x
 
 MOPE_VERSION="$1"
-MOPE_VERSION_FILE="${MOPE_ROOT}/default"
+MOPE_VERSION_FILE="${MOPE_ROOT}/version"
 
 if [ -n "$MOPE_VERSION" ]; then
 	mope-version-file-write "$MOPE_VERSION_FILE" "$MOPE_VERSION"
