@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 if [ -z "$MOPE_VERSION" ]; then
 	MOPE_VERSION_FILE="$(mope-version-file)"
 	MOPE_VERSION="$(mope-version-file-read "$MOPE_VERSION_FILE" || true)"

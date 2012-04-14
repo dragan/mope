@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 shopt -s nullglob
 
 {

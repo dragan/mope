@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 MOPE_COMMAND="$1"
 if [ -z "$MOPE_COMMAND" ]; then
 	echo "usage: mope exec COMMAND [arg1 arg2...]" >&2

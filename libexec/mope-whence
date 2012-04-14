@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 if [ "$1" = "--path" ]; then
 	print_paths="1"
 	shift

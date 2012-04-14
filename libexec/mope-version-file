@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 DEFAULT_PATH="${MOPE_ROOT}/default"
 
 root="$(pwd)"

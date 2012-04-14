@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 print_set_version() {
 	echo "<version> should be a string matching a Mono version known by mope."
 

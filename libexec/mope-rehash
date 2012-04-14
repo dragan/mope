@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 SHIMS_PATH="${MOPE_ROOT}/shims"
 PROTOTYPE_SHIM_PATH="${SHIMS_PATH}/.mope-shim"
 

@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-MOPE_VERSION="0.1.0"
-
 set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+MOPE_VERSION="0.1.0"
 
 resolve_link() {
 	$(type -p greadlink readlink | head -1) $1

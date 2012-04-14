@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 VERSION_FILE="$1"
 
 if [ -e "$VERSION_FILE" ]; then

@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 if [ -n "$1" ]; then
 	MOPE_VERSION="$1"
 elif [ -z "$MOPE_VERSION" ]; then

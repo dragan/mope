@@ -2,4 +2,6 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 echo "$(mope-version-name) (set by $(mope-version-origin))"

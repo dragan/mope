@@ -2,6 +2,8 @@
 
 set -e
 
+[ -n "$MOPE_DEBUG" ] && set -x
+
 MOPE_VERSION_FILE="$1"
 MOPE_VERSION="$2"
 
