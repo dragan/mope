@@ -22,6 +22,11 @@ abs_dirname() {
 	cd "$cwd"
 }
 
+if [ -z "${MOPE_ROOT}" ]; then
+	MOPE_ROOT="${HOME}/.mope"
+fi
+export MOPE_ROOT
+
 libexec_path="$(abs_dirname "$0")"
 export PATH="${libexec_path}:${PATH}"
 

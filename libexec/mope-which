@@ -38,10 +38,10 @@ MOPE_VERSION="$(mope-version-name)"
 MOPE_COMMAND="$1"
 
 if [ "$MOPE_VERSION" = "system" ]; then
-	PATH="$(remove_from_path "${HOME}/.mope/shims")"
+	PATH="$(remove_from_path "${MOPE_ROOT}/shims")"
 	MOPE_COMMAND_PATH="$(command -v "$MOPE_COMMAND")"
 else
-	MOPE_COMMAND_PATH="${HOME}/.mope/versions/${MOPE_VERSION}/bin/${MOPE_COMMAND}"
+	MOPE_COMMAND_PATH="${MOPE_ROOT}/versions/${MOPE_VERSION}/bin/${MOPE_COMMAND}"
 fi
 
 if [ -x "$MOPE_COMMAND_PATH" ]; then

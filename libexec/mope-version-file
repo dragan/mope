@@ -2,7 +2,7 @@
 
 set -e
 
-DEFAULT_PATH="${HOME}/.mope/default"
+DEFAULT_PATH="${MOPE_ROOT}/default"
 
 root="$(pwd)"
 while [ -n "$root" ]; do

@@ -12,7 +12,7 @@ if [ -z "$MOPE_VERSION" ] || [ "$MOPE_VERSION" = "system" ]; then
 	exit
 fi
 
-MOPE_VERSION_PATH="${HOME}/.mope/versions/${MOPE_VERSION}"
+MOPE_VERSION_PATH="${MOPE_ROOT}/versions/${MOPE_VERSION}"
 
 if [ -d "$MOPE_VERSION_PATH" ]; then
 	echo "$MOPE_VERSION"

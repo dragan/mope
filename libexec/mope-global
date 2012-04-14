@@ -3,7 +3,7 @@
 set -e
 
 MOPE_VERSION="$1"
-MOPE_VERSION_FILE="${HOME}/.mope/default"
+MOPE_VERSION_FILE="${MOPE_ROOT}/default"
 
 if [ -n "$MOPE_VERSION" ]; then
 	mope-version-file-write "$MOPE_VERSION_FILE" "$MOPE_VERSION"

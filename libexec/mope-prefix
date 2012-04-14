@@ -14,7 +14,7 @@ if [ "$MOPE_VERSION" = "system" ]; then
 	exit
 fi
 
-MOPE_PREFIX_PATH="${HOME}/.mope/versions/${MOPE_VERSION}"
+MOPE_PREFIX_PATH="${MOPE_ROOT}/versions/${MOPE_VERSION}"
 if [ ! -d "$MOPE_PREFIX_PATH" ]; then
 	echo "mope: version \`${MOPE_VERSION}' not installed" >&2
 	exit 1

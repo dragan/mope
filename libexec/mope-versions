@@ -14,7 +14,7 @@ else
 	print_version="$(mope-version)"
 fi
 
-for path in "${HOME}/.mope/versions/"*; do
+for path in "${MOPE_ROOT}/versions/"*; do
 	if [ -d "$path" ]; then
 		version="${path##*/}"
 

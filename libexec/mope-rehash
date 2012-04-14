@@ -2,7 +2,7 @@
 
 set -e
 
-SHIMS_PATH="${HOME}/.mope/shims"
+SHIMS_PATH="${MOPE_ROOT}/shims"
 PROTOTYPE_SHIM_PATH="${SHIMS_PATH}/.mope-shim"
 
 # Create ths shims directory if it doesn't already exist
@@ -37,6 +37,7 @@ create_prototype_shim() {
 	cat > "$PROTOTYPE_SHIM_PATH" <<SH
 #!/usr/bin/env bash
 set -e
+export MOPE_ROOT="$MOPE_ROOT"
 exec mope exec "\${0##*/}" "\$@"
 SH
 	chmod +x "$PROTOTYPE_SHIM_PATH"
