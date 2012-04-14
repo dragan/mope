@@ -7,7 +7,7 @@ set -e
 MOPE_VERSION="0.1.0"
 
 resolve_link() {
-	$(type -p greadlink readlink | head -1) $1
+	$(type -p greadlink readlink | head -1) "$1"
 }
 
 abs_dirname() {
