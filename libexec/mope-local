@@ -5,7 +5,9 @@ set -e
 MOPE_VERSION="$1"
 MOPE_VERSION_FILE=".mono-version"
 
-if [ -n "$MOPE_VERSION" ]; then
+if [ "$MOPE_VERSION" = "--unset" ]; then
+	rm -f "$MOPE_VERSION_FILE"
+elif [ -n "$MOPE_VERSION" ]; then
 	mope-version-file-write "$MOPE_VERSION_FILE" "$MOPE_VERSION"
 else
 	mope-version-file-read "$MOPE_VERSION_FILE" ||
