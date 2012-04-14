@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+
+set -e
+
+print_set_version() {
+	echo "<version> should be a string matching a Mono version known by mope."
+
+	local versions="$(mope-versions --bare)"
+	if [ -z "$versions" ]; then
+		echo "There are currently no Mono versions installed for mope."
+	else
+		echo "The currently installed Mono versions are:"
+		echo "$versions" | sed 's/^/  /'
+	fi
+
+	echo
+	echo "The special version string 'system' will use your default system Mono."
+}
+
+case "$1" in
+"") echo "usage: mope <command> [<args>]
+
+Some useful mope commands are:
+   commands      List all commands
+   rehash        Rehash mope shims (run this after installing binaries)
+   set-default   Set the default Mono version
+   set-local     Set a local directory-specific Mono version
+   version       Show the current Mono version
+   versions      List all Mono versions known by mope
+
+See 'mope help <command>' for more information on a specific command."
+;;
+set-default) echo "usage: mope set-default <version>
+
+Sets the default Mono version. You can override the default at any time
+by setting a directory-specific version with \`mope set-local' or by
+setting the MOPE_VERSION environment variable.
+
+$(print_set_version)"
+;;
+set-local) echo "usage: mope set-local <version>
+
+Sets the local directory-specific Mono version by writing the version
+name to a file named '.mono-version'.
+
+When you run a Mono command, mope will look for a '.mono-version'
+file in the current directory and each parent directory. If no such
+file is found in the tree, mope will use the default Mono version
+specified with \`mope set-default', or the version specified in the
+MOPE_VERSION environment variable.
+
+$(print_set_version)"
+;;
+*) echo "No command arguments needed or invalid/undocumented command."
+esac
