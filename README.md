@@ -30,6 +30,12 @@ the UNIX tradition of single-purpose tools that do one thing well.
 ## Table of Contents
 
   * [1 How It Works](#section_1)
+  * [2 Installation](#section_2)
+  * [3 Usage](#section_3)
+  * [4 Development](#section_4)
+    * [4.1 Version History](#section_4.1)
+    * [4.2 Thanks](#section_4.2)
+    * [4.3 License](#section_4.3)
 
 ## <a name="section_1"></a> 1 How It Works
 
@@ -40,12 +46,23 @@ to subdirectories of `~/.mope/versions`.  For example, you might have `~/.mope/v
 Each version is a working tree with it's own binaries, like `~/.mope/versions/2.10.9/bin/mono` and 
 `~/.mope/versions/2.10.9/bin/csharp`.
 
-## Thanks
+## <a name="section_2"></a> 2 Installation
+
+## <a name="section_3"></a> 3 Usage
+
+## <a name="section_4"></a> 4 Development
+
+### <a name="section_4.1"></a> 4.1 Version History
+
+No releases yet.
+
+### <a name="section_4.2"></a> 4.2 Thanks
 
 This project was heavily inspired by the [rbenv](https://github.com/sstephenson/ruby-build) 
-project by Sam Stephenson. 
+project by Sam Stephenson.
 
-## License
+### <a name="section_4.3"></a> 4.3 License 
+
 mope is released under the [MIT License][mit-license]. See LICENSE for more information.
 
 [mit-license]: http://www.opensource.org/licenses/mit-license.php
