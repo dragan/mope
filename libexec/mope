@@ -31,8 +31,15 @@ else
 fi
 export MOPE_ROOT
 
-libexec_path="$(abs_dirname "$0")"
-export PATH="${libexec_path}:${PATH}"
+shopt -s nullglob
+
+bin_path="$(abs_dirname "$0")"
+for plugin_bin in "${MOPE_ROOT}/plugins/"*/bin; do
+	bin_path="${bin_path}:${plugin_bin}"
+done
+export PATH="${bin_path}:${PATH}"
+
+shopt -u nullglob
 
 command="$1"
 case $command in
