@@ -23,22 +23,22 @@ case "$1" in
 Some useful mope commands are:
    commands      List all commands
    rehash        Rehash mope shims (run this after installing binaries)
-   set-default   Set the default Mono version
-   set-local     Set a local directory-specific Mono version
+   global        Set the global Mono version
+   local         Set a local directory-specific Mono version
    version       Show the current Mono version
    versions      List all Mono versions known by mope
 
 See 'mope help <command>' for more information on a specific command."
 ;;
-set-default) echo "usage: mope set-default <version>
+global) echo "usage: mope global <version>
 
 Sets the default Mono version. You can override the default at any time
-by setting a directory-specific version with \`mope set-local' or by
+by setting a directory-specific version with \`mope local' or by
 setting the MOPE_VERSION environment variable.
 
 $(print_set_version)"
 ;;
-set-local) echo "usage: mope set-local <version>
+local) echo "usage: mope local <version>
 
 Sets the local directory-specific Mono version by writing the version
 name to a file named '.mono-version'.
@@ -46,7 +46,7 @@ name to a file named '.mono-version'.
 When you run a Mono command, mope will look for a '.mono-version'
 file in the current directory and each parent directory. If no such
 file is found in the tree, mope will use the default Mono version
-specified with \`mope set-default', or the version specified in the
+specified with \`mope global', or the version specified in the
 MOPE_VERSION environment variable.
 
 $(print_set_version)"

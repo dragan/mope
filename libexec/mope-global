@@ -4,11 +4,11 @@ set -e
 
 MOPE_VERSION="$1"
 if [ -z "$MOPE_VERSION" ]; then
-	echo "usage: mope set-local VERSION" >&2
+	echo "usage: mope global VERSION" >&2
 	exit 1
 fi
 
 # Make sure the specified version is installed
 mope-prefix "$MOPE_VERSION" >/dev/null
 
-echo "$MOPE_VERSION" > .mono-version
+echo "$MOPE_VERSION" > "${HOME}/.mope/default"
