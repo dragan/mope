@@ -3,16 +3,10 @@
 set -e
 
 MOPE_VERSION="$1"
-VERSION_FILE="${HOME}/.mope/default"
-if [ -z "$MOPE_VERSION" ]; then
-	if [ -e "$VERSION_FILE" ]; then
-		cat "$VERSION_FILE"
-	else
-		echo "No default version configured - set with: mope global <version>"
-	fi
-else
-	# Make sure the specified version is installed
-	mope-prefix "$MOPE_VERSION" >/dev/null
+MOPE_VERSION_FILE="${HOME}/.mope/default"
 
-	echo "$MOPE_VERSION" > "$VERSION_FILE"
+if [ -n "$MOPE_VERSION" ]; then
+	mope-version-file-write "$MOPE_VERSION_FILE" "$MOPE_VERSION"
+else
+	mope-version-file-read "$MOPE_VERSION_FILE" || echo system
 fi

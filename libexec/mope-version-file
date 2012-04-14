@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+
+set -e
+
+DEFAULT_PATH="${HOME}/.mope/default"
+
+root="$(pwd)"
+while [ -n "$root" ]; do
+	if [ -e "${root}/.mono-version" ]; then
+		echo "${root}/.mono-version"
+		exit
+	fi
+	root="${root%/*}"
+done
+
+echo "$DEFAULT_PATH"

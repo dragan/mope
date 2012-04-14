@@ -2,29 +2,11 @@
 
 set -e
 
-# Read the first non-whitspace word from the specified file.
-read_version_file() {
-	local words version
-	while read -a words; do
-		version="${words[0]}"
-		if [ -n "$version" ]; then
-			echo "$version"
-			break
-		fi
-	done < "$1"
-}
-
 DEFAULT_PATH="${HOME}/.mope/default"
 
 if [ -z "$MOPE_VERSION" ]; then
-	MOPE_VERSION_FILE="$(mope-version-origin)"
-
-	if [ -n "$MOPE_VERSION_FILE" ]; then
-		MOPE_VERSION="$(read_version_file "$MOPE_VERSION_FILE")"
-	else
-		echo system > "$DEFAULT_PATH"
-		MOPE_VERSION=system
-	fi
+	MOPE_VERSION_FILE="$(mope-version-file)"
+	MOPE_VERSION="$(mope-version-file-read "$MOPE_VERSION_FILE" || true)"
 fi
 
 if [ "$MOPE_VERSION" = "system" ]; then

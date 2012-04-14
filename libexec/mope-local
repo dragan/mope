@@ -3,16 +3,14 @@
 set -e
 
 MOPE_VERSION="$1"
-VERSION_FILE=".mono-version"
-if [ -z "$MOPE_VERSION" ]; then
-	if [ -e "$VERSION_FILE" ]; then
-		cat "$VERSION_FILE"
-	else
-		echo "No local version configured - set with: mope local <version>"
-	fi
-else
-	# Make sure the specified version is installed
-	mope-prefix "$MOPE_VERSION" >/dev/null
+MOPE_VERSION_FILE=".mono-version"
 
-	echo "$MOPE_VERSION" > "$VERSION_FILE"
+if [ -n "$MOPE_VERSION" ]; then
+	mope-version-file-write "$MOPE_VERSION_FILE" "$MOPE_VERSION"
+else
+	mope-version-file-read "$MOPE_VERSION_FILE" ||
+	{
+		echo "mope: no local version configured for this directory"
+		exit 1
+	} >&2
 fi

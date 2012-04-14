@@ -2,30 +2,8 @@
 
 set -e
 
-find_version_file() {
-	local root="$(pwd)"
-	while [ -n "$root" ]; do
-		if [ -e "${root}/.mono-version" ]; then
-			echo "${root}/.mono-version"
-			return 0
-		fi
-		root="${root%/*}"
-	done
-	return 1
-}
-
-DEFAULT_PATH="${HOME}/.mope/default"
-
-find_default_version_file() {
-	if [ -e "$DEFAULT_PATH" ]; then
-		echo "$DEFAULT_PATH"
-		return 0
-	fi
-	return 1
-}
-
-if [ -z "$MOPE_VERSION" ]; then
-	find_version_file || find_default_version_file || true
-else
+if [ -n "$MOPE_VERSION" ]; then
 	echo "MOPE_VERSION environment variable"
+else
+	mope-version-file
 fi
