@@ -23,8 +23,8 @@ case "$1" in
 Some useful mope commands are:
    commands      List all commands
    rehash        Rehash mope shims (run this after installing binaries)
-   global        Set the global Mono version
-   local         Set a local directory-specific Mono version
+   global        Set or show the global Mono version
+   local         Set or show the local directory-specific Mono version
    version       Show the current Mono version
    versions      List all Mono versions known by mope
 
