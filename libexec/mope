@@ -26,6 +26,8 @@ abs_dirname() {
 
 if [ -z "${MOPE_ROOT}" ]; then
 	MOPE_ROOT="${HOME}/.mope"
+else
+	MOPE_ROOT="${MOPE_ROOT%/}"
 fi
 export MOPE_ROOT
 
