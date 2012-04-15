@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	echo system
+	exec mope-versions --bare
+fi
+
+MOPE_VERSION="$1"
+MOPE_VERSION_FILE="${MOPE_ROOT}/version"
+
+if [ -n "$MOPE_VERSION" ]; then
+	mope-version-file-write "$MOPE_VERSION_FILE" "$MOPE_VERSION"
+else
+	mope-version-file-read "$MOPE_VERSION_FILE" || echo system
+fi

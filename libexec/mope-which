@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	exec mope shims --short
+fi
+
+expand_path() {
+	local path="$1"
+	
+	if [ ! -d "$path" ]; then
+		return 1
+	fi
+
+	local cwd="$(pwd)"
+	cd "$path"
+	pwd
+	cd "$cwd"
+}
+
+remove_from_path() {
+	local path_to_remove="$(expand_path "$1")"
+	local result=""
+
+	if [ -z "$path_to_remove" ]; then
+		echo "${PATH}"
+		return
+	fi
+
+	local paths
+	IFS=: paths=($PATH)
+
+	for path in "${paths[@]}"; do
+		path="$(expand_path "$path" || true)"
+		if [ -n "$path" ] && [ "$path" != "$path_to_remove" ]; then
+			result="${result}${path}:"
+		fi
+	done
+
+	echo "${result%:}"
+}
+
+MOPE_VERSION="$(mope-version-name)"
+MOPE_COMMAND="$1"
+
+if [ -z "$MOPE_COMMAND" ]; then
+	echo "usage: mope which COMMAND" >&2
+	exit 1
+fi
+
+if [ "$MOPE_VERSION" = "system" ]; then
+	PATH="$(remove_from_path "${MOPE_ROOT}/shims")"
+	MOPE_COMMAND_PATH="$(command -v "$MOPE_COMMAND")"
+else
+	MOPE_COMMAND_PATH="${MOPE_ROOT}/versions/${MOPE_VERSION}/bin/${MOPE_COMMAND}"
+fi
+
+if [ -x "$MOPE_COMMAND_PATH" ]; then
+	echo "$MOPE_COMMAND_PATH"
+else
+	echo "mope: $MOPE_COMMAND: command not found" >&2
+
+	versions="$(mope-whence "$MOPE_COMMAND" || true)"
+	if [ -n "$versions" ]; then
+		{
+			echo
+			echo "The \`$1' command exists in these Mono versions:"
+			echo "$versions" | sed 's/^/  /g'
+			echo
+		} >&2
+	fi
+
+	exit 127
+fi

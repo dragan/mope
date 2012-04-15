@@ -1,0 +1,37 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	echo --path
+	exec mope shims --short
+fi
+
+if [ "$1" = "--path" ]; then
+	print_paths="1"
+	shift
+else
+	print_paths=""
+fi
+
+whence() {
+	local command="$1"
+	mope-versions --bare | while read version; do
+		path="$(mope-prefix "$version")/bin/${command}"
+		if [ -x "$path" ]; then
+			[ "$print_paths" ] && echo "$path" || echo "$version"
+		fi
+	done
+}
+
+MOPE_COMMAND="$1"
+if [ -z "$MOPE_COMMAND" ]; then
+	echo "usage: mope whence [--path] COMMAND" >&2
+	exit 1
+fi
+
+result="$(whence "$MOPE_COMMAND")"
+[ -n "$result" ] && echo "$result"

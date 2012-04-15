@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+root="$MOPE_DIR"
+local_version_file=".mono-version"
+while [ -n "$root" ]; do
+	if [ -e "${root}/${local_version_file}" ]; then
+		echo "${root}/${local_version_file}"
+		exit
+	fi
+	root="${root%/*}"
+done
+
+global_version_file="${MOPE_ROOT}/version"
+
+echo "$global_version_file"

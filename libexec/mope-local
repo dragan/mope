@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	echo --unset
+	echo system
+	exec mope-versions --bare
+fi
+
+MOPE_VERSION="$1"
+MOPE_VERSION_FILE=".mono-version"
+
+if [ "$MOPE_VERSION" = "--unset" ]; then
+	rm -f "$MOPE_VERSION_FILE"
+elif [ -n "$MOPE_VERSION" ]; then
+	mope-version-file-write "$MOPE_VERSION_FILE" "$MOPE_VERSION"
+else
+	mope-version-file-read "$MOPE_VERSION_FILE" ||
+	{
+		echo "mope: no local version configured for this directory"
+		exit 1
+	} >&2
+fi

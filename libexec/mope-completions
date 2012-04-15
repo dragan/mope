@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+COMMAND="$1"
+if [ -z "$COMMAND" ]; then
+	echo "usage: mope completions COMMAND [arg1 arg2...]" >&2
+	exit 1
+fi
+
+COMMAND_PATH="$(command -v "mope-$COMMAND" || command -v "mope-sh-$COMMAND")"
+if grep -i "^# provide mope completions" "$COMMAND_PATH" >/dev/null; then
+	shift
+	exec "$COMMAND_PATH" --complete "$@"
+fi

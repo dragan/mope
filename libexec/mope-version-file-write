@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+MOPE_VERSION_FILE="$1"
+MOPE_VERSION="$2"
+
+if [ -z "$MOPE_VERSION" ] || [ -z "$MOPE_VERSION_FILE" ]; then
+	echo "usage: mope write-version-file filename version" >&2
+	exit 1
+fi
+
+# Make sure the specified version is installed.
+mope-prefix "$MOPE_VERSION" >/dev/null
+
+# Write the version out to disk.
+echo "$MOPE_VERSION" > "$MOPE_VERSION_FILE"

@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+if [ -n "$MOPE_VERSION" ]; then
+	echo "MOPE_VERSION environment variable"
+else
+	mope-version-file
+fi

@@ -1,0 +1,70 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+resolve_link() {
+	$(type -p greadlink readlink | head -1) "$1"
+}
+
+abs_dirname() {
+	local cwd="$(pwd)"
+	local path="$1"
+
+	while [ -n "$path" ]; do
+		cd "${path%/*}"
+		local name="${path##*/}"
+		path="$(resolve_link "$name" || true)"
+	done
+
+	pwd
+	cd "$cwd"
+}
+
+if [ -z "${MOPE_ROOT}" ]; then
+	MOPE_ROOT="${HOME}/.mope"
+else
+	MOPE_ROOT="${MOPE_ROOT%/}"
+fi
+export MOPE_ROOT
+
+if [ -z "${MOPE_DIR}" ]; then
+	MOPE_DIR="$(pwd)"
+else
+	cd "$MOPE_DIR" 2>/dev/null || {
+		echo "mope: cannot change working directory to \`$MOPE_DIR'"
+		exit 1
+	} >&2
+	MOPE_DIR="$(pwd)"
+	cd "$OLDPWD"
+fi
+export MOPE_DIR
+
+shopt -s nullglob
+
+bin_path="$(abs_dirname "$0")"
+for plugin_bin in "${MOPE_ROOT}/plugins/"*/bin; do
+	bin_path="${bin_path}:${plugin_bin}"
+done
+export PATH="${bin_path}:${PATH}"
+
+shopt -u nullglob
+
+command="$1"
+case $command in
+"" | "-h" | "--help")
+	echo "mope 0.1.0" >&2
+	echo "$(mope-help)" >&2
+	;;
+*)
+	command_path="$(command -v "mope-$command" || true)"
+	if [ -z "$command_path" ]; then
+		echo "mope: no such command \`$command'" >&2
+		exit 1
+	fi
+
+	shift 1
+	exec "$command_path" "$@"
+	;;
+esac

@@ -1,0 +1,24 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+if [ -z "$MOPE_VERSION" ]; then
+	MOPE_VERSION_FILE="$(mope-version-file)"
+	MOPE_VERSION="$(mope-version-file-read "$MOPE_VERSION_FILE" || true)"
+fi
+
+if [ -z "$MOPE_VERSION" ] || [ "$MOPE_VERSION" = "system" ]; then
+	echo "system"
+	exit
+fi
+
+MOPE_VERSION_PATH="${MOPE_ROOT}/versions/${MOPE_VERSION}"
+
+if [ -d "$MOPE_VERSION_PATH" ]; then
+	echo "$MOPE_VERSION"
+else
+	echo "mope: version \`$MOPE_VERSION' is not installed" >&2
+	exit 1
+fi
