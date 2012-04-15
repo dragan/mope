@@ -265,13 +265,20 @@ Lists all Mope versions with the given command installed.
 
 ## <a name="section_4"></a> 4 Development
 
+The mope source code is [hosted on
+GitHub](https://github.com/dragan/mope). It's clean, modular,
+and easy to understand, even if you're not a shell hacker.
+
+Please feel free to submit pull requests and file bugs on the [issue
+tracker](https://github.com/dragan/mope/issues).
+
 ### <a name="section_4.1"></a> 4.1 Version History
 
 No releases yet.
 
 ### <a name="section_4.2"></a> 4.2 Thanks
 
-This project was heavily inspired by the [rbenv](https://github.com/sstephenson/ruby-build) 
+This project was heavily inspired by the [rbenv](https://github.com/sstephenson/rbenv) 
 project by Sam Stephenson.
 
 ### <a name="section_4.3"></a> 4.3 License 
