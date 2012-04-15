@@ -19,9 +19,44 @@ do
 	fi
 done
 
+shell="$1"
+if [ -z "$shell" ]; then
+	shell="$(basename "$SHELL")"
+fi
+
+if [ -z "$print" ]; then
+	case "$shell" in
+	bash )
+		profile='~/.bash_profile'
+		;;
+	zsh )
+		profile='~/.zshrc'
+		;;
+	* )
+		profile='your profile'
+		;;
+	esac
+
+	{
+		echo "# Load mope automatically by adding"
+		echo "# the following to ${profile}:"
+		echo
+		echo 'eval "$(mope init -)"'
+		echo
+	} >&2
+
+	exit 1
+fi
+
 mkdir -p "${MOPE_ROOT}/"{shims,versions}
 
 echo 'export PATH="'${MOPE_ROOT}'/shims:${PATH}"'
+
+case "$shell" in
+bash | zsh )
+	echo "source \"${MOPE_ROOT}/completions/mope.${shell}\""
+	;;
+esac
 
 if [ -z "$no_rehash" ]; then
 	echo 'mope rehash 2>/dev/null'
