@@ -37,6 +37,7 @@ the UNIX tradition of single-purpose tools that do one thing well.
   * [3 Usage](#section_3)
     * [3.1 mope global](#section_3.1)
     * [3.2 mope local](#section_3.2)
+    * [3.3 mope shell](#section_3.3)
   * [4 Development](#section_4)
     * [4.1 Version History](#section_4.1)
     * [4.2 Thanks](#section_4.2)
@@ -187,7 +188,8 @@ currently configured global version.
 Sets a local per-project Mono version by writing the version name to
 a `.mono-version` file in the current directory. This version
 overrides the global, and can be overridden itself by setting the
-`MOPE_VERSION` environment variable.
+`MOPE_VERSION` environment variable or with the `mope shell` 
+command.
 
     $ mope local 2.11.0
 
@@ -195,6 +197,26 @@ When run without a version number, `mope local` reports the currently
 configured local version. You can also unset the local version:
 
     $ mope local --unset
+
+### <a name="section_3.3"></a> 3.3 mope shell
+
+Sets a shell-specific Mono version by setting the `MOPE_VERSION` 
+environment variable in your shell. This version overrides both 
+project-specific versions and the global version.
+
+    $ mope shell 2.11.0
+
+When run without a version number, `mope shell` reports the current 
+value of `MOPE_VERSION`. You can also unset the shell version:
+
+    $ mope shell --unset
+
+Note that you'll need mope's shell integration enabled (step 3 of
+the installation instructions) in order to use this command. If you
+prefer not to use shell integration, you may simply set the
+`MOPE_VERSION` variable yourself:
+
+    $ export MOPE_VERSION=2.11.0
 
 ## <a name="section_4"></a> 4 Development
 
