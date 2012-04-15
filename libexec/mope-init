@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+print=""
+no_rehash=""
+for args in "$@"
+do
+	if [ "$args" = "-" ]; then
+		print=1
+		shift
+	fi
+
+	if [ "$args" = "--no-rehash" ]; then
+		no_rehash=1
+		shift
+	fi
+done
+
+mkdir -p "${MOPE_ROOT}/"{shims,versions}
+
+echo 'export PATH="'${MOPE_ROOT}'/shims:${PATH}"'
+
+if [ -z "$no_rehash" ]; then
+	echo 'mope rehash 2>/dev/null'
+fi
