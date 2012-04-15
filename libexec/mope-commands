@@ -4,6 +4,13 @@ set -e
 
 [ -n "$MOPE_DEBUG" ] && set -x
 
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	echo --sh
+	echo --no-sh
+	exit
+fi
+
 if [ "$1" = "--sh" ]; then
 	sh=1
 	shift
