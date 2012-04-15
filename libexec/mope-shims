@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+
+set -e
+
+[ -n "$MOPE_DEBUG" ] && set -x
+
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	echo --short
+	exit
+fi
+
+for command in "${MOPE_ROOT}/shims/"*; do
+	if [ "$1" = "--short" ]; then
+		echo "${command##*/}"
+	else
+		echo "$command"
+	fi
+done | sort
