@@ -26,3 +26,21 @@ echo 'export PATH="'${MOPE_ROOT}'/shims:${PATH}"'
 if [ -z "$no_rehash" ]; then
 	echo 'mope rehash 2>/dev/null'
 fi
+
+commands=(`mope commands --sh`)
+IFS="|"
+cat <<EOS
+mope() {
+	local command="\$1"
+	if [ "\$#" -gt 0 ]; then
+		shift
+	fi
+
+	case "\$command" in
+	${commands[*]})
+		eval \`mope "sh-\$command" "\$@"\`;;
+	*)
+		command mope "\$command" "\$@";;
+	esac
+}
+EOS

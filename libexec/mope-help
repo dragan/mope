@@ -27,6 +27,7 @@ Some useful mope commands are:
    rehash        Rehash mope shims (run this after installing binaries)
    global        Set or show the global Mono version
    local         Set or show the local directory-specific Mono version
+   shell         Set or show the shell-specific Mono version
    version       Show the current Mono version
    versions      List all Mono versions known by mope
    which         Show the fule path for the given Mono command
@@ -36,6 +37,8 @@ See 'mope help <command>' for more information on a specific command.
 For full documentation, see:  https://github.com/dragan/mope#readme"
 ;;
 commands) echo "usage: mope commands
+       mope commands --sh
+       mope commands --no-sh
 
 List all mope commands."
 ;;
@@ -64,6 +67,15 @@ $(print_set_version)
 To remove the local directory-specific Mono version, just pass the 
 --unset option and the '.mono-version' file will be removed from 
 the current directory."
+;;
+shell) echo "usage: mope shell <version>
+       mope shell --unset
+
+Sets a shell-specific Mono version by setting the 'MOPE_VERSION'
+environment variable in your shell. This version overrides both
+project-specific versions and the global version.
+
+$(print_set_version)"
 ;;
 version) echo "usage: mope version
 
