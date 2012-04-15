@@ -4,6 +4,13 @@ set -e
 
 [ -n "$MOPE_DEBUG" ] && set -x
 
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	echo --unset
+	echo system
+	exec mope-versions --bare
+fi
+
 MOPE_VERSION="$1"
 MOPE_VERSION_FILE=".mono-version"
 

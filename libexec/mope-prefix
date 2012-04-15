@@ -4,6 +4,12 @@ set -e
 
 [ -n "$MOPE_DEBUG" ] && set -x
 
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	echo system
+	exec mope-versions --bare
+fi
+
 if [ -n "$1" ]; then
 	export MOPE_VERSION="$1"
 elif [ -z "$MOPE_VERSION" ]; then
