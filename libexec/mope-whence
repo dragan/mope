@@ -4,6 +4,12 @@ set -e
 
 [ -n "$MOPE_DEBUG" ] && set -x
 
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	echo --path
+	exec mope shims --short
+fi
+
 if [ "$1" = "--path" ]; then
 	print_paths="1"
 	shift

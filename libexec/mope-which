@@ -4,6 +4,11 @@ set -e
 
 [ -n "$MOPE_DEBUG" ] && set -x
 
+# Provide mope completions
+if [ "$1" = "--complete" ]; then
+	exec mope shims --short
+fi
+
 expand_path() {
 	local path="$1"
 	
