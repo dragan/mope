@@ -274,7 +274,9 @@ tracker](https://github.com/dragan/mope/issues).
 
 ### <a name="section_4.1"></a> 4.1 Version History
 
-No releases yet.
+**0.1.0** (April 14, 2012)
+
+* Initial public release.
 
 ### <a name="section_4.2"></a> 4.2 Thanks
 
