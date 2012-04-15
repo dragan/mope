@@ -38,6 +38,11 @@ the UNIX tradition of single-purpose tools that do one thing well.
     * [3.1 mope global](#section_3.1)
     * [3.2 mope local](#section_3.2)
     * [3.3 mope shell](#section_3.3)
+    * [3.4 mope versions](#section_3.4)
+    * [3.5 mope version](#section_3.5)
+    * [3.6 mope rehash](#section_3.6)
+    * [3.7 mope which](#section_3.7)
+    * [3.8 mope whence](#section_3.8)
   * [4 Development](#section_4)
     * [4.1 Version History](#section_4.1)
     * [4.2 Thanks](#section_4.2)
@@ -104,7 +109,7 @@ easy to fork and contribute any changes back upstream.
         $ mope install 2.11.0
 
 6. Rebuild the shim binaries. You should do this any time you install 
-   new Mono binary's (for example, when installing a new Mono version).
+   new Mono binaries (for example, when installing a new Mono version).
 
         $ mope rehash
 
@@ -217,6 +222,46 @@ prefer not to use shell integration, you may simply set the
 `MOPE_VERSION` variable yourself:
 
     $ export MOPE_VERSION=2.11.0
+
+### <a name="section_3.4"></a> 3.4 mope versions
+
+Lists all Mono versions known to mope, and shows an asterisk next to 
+the currently active version.
+
+    $ mope versions
+    * 2.10.9 (set by /Users/dragan/.mope/version)
+      2.11.0
+
+### <a name="section_3.5"></a> 3.5 mope version
+
+Displays the currently active Mono version, along with information on 
+how it was set.
+
+    $ mope version
+    2.11.0 (set by /Users/dragan/Development/Sandbox/MonoProject/.mono-version)
+
+### <a name="section_3.6"></a> 3.6 mope rehash
+
+Installs shims for all Mono binaries known to mope (i.e., 
+`~/.mope/versions/*/bin/*`). Run this command after you install a new 
+version of Mono.
+
+    $ mope rehash
+
+### <a name="section_3.7"></a> 3.7 mope which
+
+Displays the full path to the binary that mope will execute when you 
+run the given command.
+
+    $ mope which csharp
+    /Users/dragan/.mope/versions/2.11.0/bin/csharp
+
+### <a name="section_3.8"></a> 3.8 mope whence
+
+Lists all Mope versions with the given command installed.
+
+    $ mope whence xsp
+    2.11.0
 
 ## <a name="section_4"></a> 4 Development
 
