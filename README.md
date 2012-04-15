@@ -31,6 +31,9 @@ the UNIX tradition of single-purpose tools that do one thing well.
 
   * [1 How It Works](#section_1)
   * [2 Installation](#section_2)
+    * [2.1 Basic GitHub Checkout](#section_2.1)
+      * [2.1.1 Upgrading](#section_2.1.1)
+    * [2.2 Neckbeard Configuration](#section_2.2)
   * [3 Usage](#section_3)
     * [3.1 mope global](#section_3.1)
     * [3.2 mope local](#section_3.2)
@@ -57,6 +60,107 @@ Because of the simplicity of the shim approach, all you need to use mope is `~/.
 in your `$PATH`.
 
 ## <a name="section_2"></a> 2 Installation
+
+### <a name="section_2.1"></a> 2.1 Basic GitHub Checkout
+
+This will get you going with the latest version of mope and make it 
+easy to fork and contribute any changes back upstream.
+
+1. Check out mope into `~/.mope`.
+
+        $ cd
+        $ git clone git://github.com/dragan/mope.git .mope
+
+2. Add `~/.mope/bin` to your `$PATH` for access to the `mope` 
+   command-line utility.
+
+        $ echo 'export PATH="$HOME/.mope/bin:$PATH"' >> ~/.bash_profile
+
+    **Zsh note**: Modify your `~/.zshenv` file instead of `~/.bash_profile`.
+
+3. Add mope init to your shell to enable shims and autocompletion.
+
+        $ echo 'eval "$(mope init -)"' >> ~/.bash_profile
+
+    **Zsh note**: Modify your `~/.zshenv` file instead of `~/.bash_profile`.
+
+4. Restart your shell so the path changes take effect. You can now 
+   begin using mope.
+
+        $ exec $SHELL
+
+5. Install Mono versions into `~/.mope/versions`. For example, to 
+   install Mono 2.11.0, download and unpack the source, then run:
+
+        $ ./configure --prefix=$HOME/.mope/versions/2.11.0
+        $ make
+        $ make install
+
+    The [mono-build](https://github.com/dragan/mono-build) project 
+    provides a `mope install` command that simplifies the process of 
+    installing new Mono versions to:
+
+        $ mope install 2.11.0
+
+6. Rebuild the shim binaries. You should do this any time you install 
+   new Mono binary's (for example, when installing a new Mono version).
+
+        $ mope rehash
+
+    **note**:  `mope install` will automatically do this for you.
+
+#### <a name="section_2.1.1"></a> 2.1.1 Upgrading
+
+If you've installed mope using the instructions above, you can 
+upgrade your installation at any time using git.
+
+To upgrade to the latest development version of mope, use `git pull`:
+
+    $ cd ~/.mope
+    $ git pull
+
+To upgrade to a specific release of mope, check out the corresponding 
+tag:
+
+    $ cd ~/.mope
+    $ git fetch
+    $ git tag
+    v0.1.0
+    v0.1.1
+    v0.1.2
+    v0.2.0
+    $ git checkout v0.2.0
+
+### <a name="section_2.2"></a> 2.2 Neckbeard Configuration
+
+Skip this section unless you must know what every line in your shell 
+profile is doing.
+
+`mope init` is the only command that crosses the line of loading 
+extra commands into your shell. Here's what `mope init` actually does:
+
+1. Sets up your shims path. This is the only requirement for mope to 
+   function properly. You can do this by hand by prepending 
+   `~/.mope/shims` to your `$PATH`.
+
+2. Installs autocompletion. This is entirely optional but pretty 
+   useful. Sourcing `~/.mope/completions/mope.bash` will set that 
+   up. There is also a `~/.mope/completions/mope.zsh` for Zsh 
+   users.
+
+3. Rehashes shims. From time to time you'll need to rebuild your 
+   shim files. Doing this on init makes sure everything is up to 
+   date. You can always run `mope rehash` manually.
+
+4. Installs the sh dispatcher. This bit is also optional, but allows 
+   mope and plugins to change variables in your current shell, making 
+   commands like `mope shell` possible. The sh dispatcher doesn't do 
+   anything crazy like override `cd` or hack your shell prompt, but if 
+   for some reason you need `mope` to be a real script rather than a 
+   shell function, you can safely skip it.
+
+Run `mope init -` for yourself to see exactly what happens under the 
+hood.
 
 ## <a name="section_3"></a> 3 Usage
 
