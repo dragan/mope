@@ -30,7 +30,7 @@ Some useful mope commands are:
    shell         Set or show the shell-specific Mono version
    version       Show the current Mono version
    versions      List all Mono versions known by mope
-   which         Show the fule path for the given Mono command
+   which         Show the full path for the given Mono command
    whence        List all Mono versions with the given command
 
 See 'mope help <command>' for more information on a specific command.
